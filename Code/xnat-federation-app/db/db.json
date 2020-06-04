@@ -1,0 +1,23 @@
+
+{
+  "users": [
+    {
+      "id":"1",
+      "email": "example@mail.com",
+      "password": "$2a$10$F.v/1x2mcmsl8RwMOCEglOHt2Nhn2fhaBfdSZBSQ7wy./eMdkFlyO",
+      "displayName": "User",
+      "xnats": [
+        { "id": "1",
+          "instance": "Local",
+          "url": "http://10.1.1.17",
+          "username": "USERNAME",
+          "password": "PASSWORD" },
+        { "id": "2",
+          "instance": "ICR",
+          "url": "https://xnatcruk.icr.ac.uk/XNAT_CRUK_ARCHIVE",
+          "username": "USERNAME",
+          "password": "PASSWORD" }
+      ]
+    },
+  ]
+}

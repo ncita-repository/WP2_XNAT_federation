@@ -1,0 +1,29 @@
+<!-- home page -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+
+<% if (!user) { %>
+	<body style="background-color:FloralWhite; font-family:arial; text-align:center">
+	<h1 style="color:IndianRed">NCITA XNAT FEDERATION</h1>
+	<p>Welcome, please log in:</p>
+	  <form style="background-color:PowderBlue; width: 200px; margin: 0 auto; padding: 30px 20px" action="/login/auth" method="post">
+	  	<div>
+	  	<input style="margin: 10px 1px" type="text" placeholder="Email" name="email"/><br/>
+	  	</div>
+	  	<div>
+	  	<input style="margin: 10px 1px" type="password" placeholder="Password" name="password"/>
+	  	</div>
+	  	<div>
+	  	<input style="margin: 10px 1px" type="submit" value="Submit"/>
+	  	</div>
+	  </form>
+	</body>
+<% } else { %>
+	<p>Hello, <%= user.displayName %>.</p>
+	<p>View all <a href="/xnat-query/projects">projects</a>.</p>
+	<p>View your <a href="/profile">profile</a>.</p>
+<% } %>
