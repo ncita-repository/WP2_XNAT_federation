@@ -1,0 +1,41 @@
+<!-- home page -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+
+<p>WELCOME TO THE NCITA FEDERATED XNAT SEARCH TOOL</p>
+
+<form action="/search" method="post">
+  <p>Imaging session criteria</p>
+    <label for="modalityList">Choose an imaging modality:</label>
+    <select id="modalityList" name="modality">
+      <option>Select modality...</option>
+      <option>CT</option>
+      <option>MRI</option>
+      <option>PET</option>
+    </select>
+    <br><br>
+      <label for="startDate">From date:</label>
+      <input id="startDate" name="startDate" type="text" placeholder="MM/DD/YYYY"/>
+      <label for="stopDate">To date:</label>
+      <input id="stopDate" name="stopDate" type="text" placeholder="MM/DD/YYYY"/>
+  <p>Subject (patient) criteria</p>
+    <label for="genderList">Choose patient gender:</label>
+    <select id="genderList" name="gender">
+      <option>Select gender...</option>
+      <option>Female</option>
+      <option>Male</option>
+      <option>Unknown</option>
+    </select>
+    <br><br>
+      <label for="minimumAge">Enter minimum age:</label>
+      <input id="minimumAge" name="minimumAge" type="text"/>
+      <label for="maximumAge">Enter maximum age:</label>
+      <input id="maximumAge" name="maximumAge" type="text"/>
+    <br><br>
+    <button type="reset" value="Reset search">Reset</button>
+    <button type="submit" value="Submit search">Submit</button>
+</form>
