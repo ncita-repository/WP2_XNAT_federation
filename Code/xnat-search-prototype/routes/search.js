@@ -7,113 +7,30 @@ const axios = require('axios');
 const xml = require('xml');
 
 // local requirements
-const formParsing = require('../code/input-form-parsing');
-const parseModality = formParsing.modalityParser;
-const parsePatientGender = formParsing.genderParser;
+const createSearchXml = require('../code/xml-creation');
 
 // make POST route for searching XNAT
 // overall route is /search
 router.post('/search', (req, res) => {
-  console.log('Inside /search callback');
 
   // get search query out of request object
-  let searchResults = req.body;
-  console.log(searchResults);
+  let searchParams = req.body;
 
-  // parse the search form inputs
-  let rootElement = parseModality(searchResults.modality);
-  let patientGender = parsePatientGender(searchResults.gender);
-  console.log(`root element is: ${rootElement}`);
-  console.log(`patient gender is: ${patientGender}`);
+  // and get out each form input
+  let rootElement = searchParams.modality;
+  let startDate = searchParams.startDate;
+  let stopDate = searchParams.stopDate;
+  let subjectGender = searchParams.gender;
+  let subjectAgeMin = searchParams.minimumAge;
+  let subjectAgeMax = searchParams.maximumAge;
 
-  // build an xml document including searched terms
-  // TODO: put in loop for the search fields
-  let searchCriteria = [ { 'xdat:search':
-    [ { _attr: {
-      'ID': '',
-      'allow-diff-columns': '0',
-      'secure': 'false',
-      'xmlns:xdat': 'http://nrg.wustl.edu/security',
-      'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance'
-    } },
-    { 'xdat:root_element_name': rootElement },
-    { 'xdat:search_field':
-      [ { 'xdat:element_name': 'xnat:mrSessionData' },
-      { 'xdat:field_ID': 'LABEL' },
-      { 'xdat:sequence': '0' },
-      { 'xdat:type': 'string' },
-      { 'xdat:header': 'MR ID' } ]
-    },
-    { 'xdat:search_field':
-      [ { 'xdat:element_name': 'xnat:subjectData' },
-      { 'xdat:field_ID': 'LABEL' },
-      { 'xdat:sequence': '1' },
-      { 'xdat:type': 'string' },
-      { 'xdat:header': 'Subject' } ]
-    },
-    { 'xdat:search_where': [ { _attr: { 'method': 'OR' } },
-      { 'xdat:child_set': [ { _attr: { 'method': 'AND' } },
-        { 'xdat:criteria': [ { _attr: { 'override_value_formatting': '0' } },
-          { 'xdat:schema_field': 'xnat:mrSessionData/sharing/share/project' },
-          { 'xdat:comparison_type': '=' },
-          { 'xdat:value': 'CENTRAL_OASIS_CS' }
-        ] },
-        { 'xdat:criteria': [ { _attr: { 'override_value_formatting': '0' } },
-          { 'xdat:schema_field': 'xnat:subjectData.GENDER_TEXT' },
-          { 'xdat:comparison_type': 'LIKE' },
-          { 'xdat:value': patientGender }
-        ] }
-      ] },
-      { 'xdat:child_set': [ { _attr: { 'method': 'AND' } },
-        { 'xdat:criteria': [ { _attr: { 'override_value_formatting': '0' } },
-          { 'xdat:schema_field': 'xnat:mrSessionData/PROJECT' },
-          { 'xdat:comparison_type': '=' },
-          { 'xdat:value': 'CENTRAL_OASIS_CS' }
-        ] },
-        { 'xdat:criteria': [ { _attr: { 'override_value_formatting': '0' } },
-          { 'xdat:schema_field': 'xnat:subjectData.GENDER_TEXT' },
-          { 'xdat:comparison_type': 'LIKE' },
-          { 'xdat:value': patientGender }
-        ] }
-      ] },
-      { 'xdat:child_set': [ { _attr: { 'method': 'AND' } },
-        { 'xdat:criteria': [ { _attr: { 'override_value_formatting': '0' } },
-          { 'xdat:schema_field': 'xnat:mrSessionData/sharing/share/project' },
-          { 'xdat:comparison_type': '=' },
-          { 'xdat:value': 'CENTRAL_OASIS_CS' }
-        ] },
-        { 'xdat:criteria': [ { _attr: { 'override_value_formatting': '0' } },
-          { 'xdat:schema_field': 'xnat:subjectData/demographics[@xsi:type=xnat:demographicData]/gender' },
-          { 'xdat:comparison_type': 'LIKE' },
-          { 'xdat:value': patientGender }
-        ] }
-      ] },
-      [],
-      { 'xdat:child_set': [ { _attr: { 'method': 'AND' } },
-        { 'xdat:criteria': [ { _attr: { 'override_value_formatting': '0' } },
-          { 'xdat:schema_field': 'xnat:mrSessionData/PROJECT' },
-          { 'xdat:comparison_type': '=' },
-          { 'xdat:value': 'CENTRAL_OASIS_CS' }
-        ] },
-        { 'xdat:criteria': [ { _attr: { 'override_value_formatting': '0' } },
-          { 'xdat:schema_field': 'xnat:subjectData/demographics[@xsi:type=xnat:demographicData]/gender' },
-          { 'xdat:comparison_type': 'LIKE' },
-          { 'xdat:value': patientGender }
-        ] }
-      ] }
-    ] }
-    ]
-  } ];
-
-  // log to check our xml
-  console.log(xml(searchCriteria, { indent: '\t', declaration: true }));
-
-  // create the xml to send off in the search
-  let searchXML = xml(searchCriteria, { declaration: true });
+  // create an xml to search XNAT
+  let searchXml = createSearchXml(rootElement, startDate, stopDate, subjectGender,
+    subjectAgeMin, subjectAgeMax);
 
   // make the request using the xml with axios
-  let url = 'XNAT_URL';
-  axios.post(url, searchXML, {
+  let url = 'XNAT-URL';
+  axios.post(url, searchXml, {
     headers: {'content-type': 'application/xml'},
     auth: {
       username: 'USERNAME',
@@ -128,7 +45,7 @@ router.post('/search', (req, res) => {
   });
 
   // redirect to page for displaying search results
-  res.render('search-results', { results: searchResults });
+  res.render('search-results', { results: searchParams });
 })
 
 module.exports = router;

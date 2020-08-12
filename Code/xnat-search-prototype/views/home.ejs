@@ -10,12 +10,12 @@
 
 <form action="/search" method="post">
   <p>Imaging session criteria</p>
-    <label for="modalityList">Choose an imaging modality:</label>
+    <label for="modalityList">Choose an imaging modality (required):</label>
     <select id="modalityList" name="modality">
-      <option>Select modality...</option>
-      <option>CT</option>
-      <option>MRI</option>
-      <option>PET</option>
+      <option disabled selected>Select modality...</option>
+      <option value="xnat:ctSessionData" >CT</option>
+      <option value="xnat:mrSessionData">MRI</option>
+      <option value="xnat:petSessionData">PET</option>
     </select>
     <br><br>
       <label for="startDate">From date:</label>
@@ -25,10 +25,9 @@
   <p>Subject (patient) criteria</p>
     <label for="genderList">Choose patient gender:</label>
     <select id="genderList" name="gender">
-      <option>Select gender...</option>
-      <option>Female</option>
-      <option>Male</option>
-      <option>Unknown</option>
+      <option value="U" selected>Any</option>
+      <option value="F">Female</option>
+      <option value"M">Male</option>
     </select>
     <br><br>
       <label for="minimumAge">Enter minimum age:</label>
