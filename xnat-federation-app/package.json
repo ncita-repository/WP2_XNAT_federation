@@ -1,5 +1,5 @@
 {
-  "name": "local-fed-app-json",
+  "name": "xnat-fed-app",
   "version": "1.0.0",
   "description": "xnat fed app with json db",
   "main": "server.js",
