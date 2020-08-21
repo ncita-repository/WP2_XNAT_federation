@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="topbar">
+  <h1>NCITA XNAT FEDERATION</h1>
+</div>
+
+<div class="content">
+  <h2>Welcome, <%= user.displayName %>.</h2>
+  <h3>This is where you can see information about your account:</h3>
+  <p>Email: <%= user.email %></p>
+  <p>Available XNAT instances:</p>
+  <% user.xnats.forEach((item, i) => { %>
+      <p><%= item.instance %></p>
+  <% }); %>
+</div>
+
+<div class="footer">
+  <a href="/search-form">Search XNAT</a>
+  <a href="/profile">Your profile</a>
+  <a href="/logout">Logout</a>
+</div>
+
+</body>

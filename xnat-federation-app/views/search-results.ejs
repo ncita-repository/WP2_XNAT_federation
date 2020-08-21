@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="topbar">
+  <h1>NCITA XNAT FEDERATION</h1>
+</div>
+
+<div class="content">
+  <h2>Search results:</h2>
+  <div class="content">
+    <table>
+      <tr>
+        <th>XNAT INSTANCE</th>
+        <th>PROJECT</th>
+        <th>PROJECT DATE</th>
+        <th>SUBJECT LABEL</th>
+        <th>SUBJECT GENDER</th>
+        <th>SUBJECT AGE</th>
+      </tr>
+      <% results.forEach((xnatArray, xnatIdx) => { %>
+        <% xnatArray.forEach((result, resultIdx) => { %>
+          <tr>
+            <td><%= user.xnats[xnatIdx].instance %></td>
+            <td><%= result.project %></td>
+            <td><%= result.date %></td>
+            <td><%= result.xnat_subjectdata_subject_label %></td>
+            <td><%= result.xnat_subjectdata_gender_text %></td>
+            <td><%= result.age %></td>
+          </tr>
+        <% }) %>
+      <% }) %>
+    </table>
+  </div>
+</div>
+
+<div class="footer">
+  <a href="/search-form">Search XNAT</a>
+  <a href="/profile">Your profile</a>
+  <a href="/logout">Logout</a>
+</div>
+
+</body>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="topbar">
+  <h1>NCITA XNAT FEDERATION</h1>
+</div>
+
+<div class="content">
+  <h2>Search your XNAT instances here:</h2>
+
+  <form action="/search" method="post">
+    <h3>Imaging session criteria</h3>
+      <label for="modalityList">Choose an imaging modality (required):</label>
+      <select id="modalityList" name="modality">
+        <option disabled selected>Select modality...</option>
+        <option value="xnat:ctSessionData" >CT</option>
+        <option value="xnat:mrSessionData">MRI</option>
+        <option value="xnat:petSessionData">PET</option>
+      </select>
+      <br><br>
+        <label for="startDate">From date:</label>
+        <input id="startDate" name="startDate" type="text" placeholder="MM/DD/YYYY"/>
+        <label for="stopDate">To date:</label>
+        <input id="stopDate" name="stopDate" type="text" placeholder="MM/DD/YYYY"/>
+    <h3>Subject (patient) criteria</h3>
+      <label for="genderList">Choose patient gender:</label>
+      <select id="genderList" name="gender">
+        <option value="U" selected>Any</option>
+        <option value="F">Female</option>
+        <option value"M">Male</option>
+      </select>
+      <br><br>
+        <label for="minimumAge">Enter minimum age:</label>
+        <input id="minimumAge" name="minimumAge" type="text"/>
+        <label for="maximumAge">Enter maximum age:</label>
+        <input id="maximumAge" name="maximumAge" type="text"/>
+      <br><br>
+      <button type="reset" value="Reset search">Reset</button>
+      <button type="submit" value="Submit search">Submit</button>
+  </form>
+</div>
+
+<div class="footer">
+  <a href="/profile">Your profile</a>
+  <a href="/logout">Logout</a>
+</div>
+
+</body>

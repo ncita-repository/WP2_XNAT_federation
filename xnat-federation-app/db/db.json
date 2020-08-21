@@ -1,0 +1,36 @@
+
+{
+  "users": [
+    {
+      "id":"1",
+      "email": "USER_1@mail.com",
+      "password": "$2a$10$kDMutlvH0Q5Cjd8zMTuSLuYoTWU.0jyIOtpfxGlDCIEFB59NuRP7y",
+      "displayName": "USER_1_DISPLAY_NAME",
+      "xnats": [
+        { "id": "1",
+          "instance": "INSTANCE_1_NAME",
+          "url": "INSTANCE_1_URL",
+          "username": "USER_1_XNAT_1_USERNAME",
+          "password": "USER_1_XNAT_1_PASSWORD" },
+        { "id": "2",
+          "instance": "INSTANCE_2_NAME",
+          "url": "INSTANCE_2_URL",
+          "username": "USER_1_XNAT_2_USERNAME",
+          "password": "USER_1_XNAT_2_PASSWORD" }
+      ]
+    },
+    {
+      "id":"2",
+      "email": "USER_2@mail.com",
+      "password": "$2a$10$KNkdDFiHOXljV1/j34X39uLIsfNyf/15AjqTbvkgX/2QVVNaCrGDO",
+      "displayName": "USER_2_DISPLAY_NAME",
+      "xnats": [
+        { "id": "1",
+          "instance": "INSTANCE_1_NAME",
+          "url": "INSTANCE_1_URL",
+          "username": "USER_2_XNAT_1_USERNAME",
+          "password": "USER_2_XNAT_1_PASSWORD" }
+      ]
+    }
+  ]
+}

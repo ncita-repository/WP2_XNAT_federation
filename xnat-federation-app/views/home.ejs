@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="/style.css">
+</head>
+
+<% if (!user) { %>
+	<body>
+		<div class="topbar">
+			<h1>NCITA XNAT FEDERATION</h1>
+		</div>
+		<div class="content">
+			<h2>Welcome, please log in:</h2>
+			  <form action="/login/auth" method="post">
+			  	<div>
+			  	<input type="text" placeholder="Email" name="email"/><br/>
+			  	</div>
+			  	<div>
+			  	<input type="password" placeholder="Password" name="password"/>
+			  	</div>
+			  	<div>
+			  	<input type="submit" value="Submit"/>
+			  	</div>
+			  </form>
+			</div>
+	</body>
+<% } else { %>
+	<body>
+		<div class="topbar">
+			<h1>NCITA XNAT FEDERATION</h1>
+		</div>
+		<div class="content">
+			<h2>Welcome, <%= user.displayName %>.</h2>
+			<p>This is the NCITA XNAT Federation application.</p>
+			<p>Here, you can search all of the XNAT instances to which you have access.</p>
+			<p>Follow the links below to explore.</p>
+		</div>
+		<div class="footer">
+			<a href="/search-form">Search XNAT</a>
+		  <a href="/profile">Your profile</a>
+		  <a href="/logout">Logout</a>
+		</div>
+	</body>
+<% } %>
