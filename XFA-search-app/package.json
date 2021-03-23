@@ -1,7 +1,7 @@
 {
-  "name": "xnat-fed-app",
+  "name": "XFA-search-app",
   "version": "1.0.0",
-  "description": "xnat fed app with json db",
+  "description": "xnat searching app with json db",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
