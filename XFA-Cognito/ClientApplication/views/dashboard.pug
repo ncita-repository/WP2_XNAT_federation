@@ -1,0 +1,12 @@
+extends base.pug
+
+block body
+  h1.text-center User Dashboard
+
+  .jumbotron
+    ul
+      li Hello, #{username}
+      li Your Email Address is: #{email}
+
+    p.
+      If you'd like to logout, please #[a(href="/logout") click here].
