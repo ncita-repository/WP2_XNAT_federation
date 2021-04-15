@@ -1,0 +1,3 @@
+-----BEGIN PUBLIC KEY-----
+<key goes here>
+-----END PUBLIC KEY-----
